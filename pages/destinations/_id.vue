@@ -6,9 +6,15 @@
     <div class="content">
       <div>
         <h1 class="title">Liste des tickets</h1>
-        <p v-for="(ticket, idx) in tickets" :key="idx" class="giant-button">
-          {{ ticket }}
-        </p>
+        <NuxtLink
+          v-for="(ticket, idx) in tickets"
+          :key="idx"
+          :to="{ name: 'tickets-id', params: { id: ticket.number } }"
+          class="giant-button"
+        >
+          Ticket number : {{ ticket.number }} -- Passenger :
+          {{ ticket.passenger }}
+        </NuxtLink>
       </div>
     </div>
   </div>

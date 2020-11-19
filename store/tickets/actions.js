@@ -9,4 +9,12 @@ export default {
       commit('setTickets', [])
     }
   },
+  async loadTicket({ commit }, id) {
+    try {
+      const ticket = await service.getOneTicket(id)
+      commit('setTicket', ticket)
+    } catch (e) {
+      commit('setTicket', {})
+    }
+  },
 }
