@@ -5,17 +5,10 @@
     </div>
     <div class="content">
       <div>
-        <h1 class="title">Choose your dream destination...</h1>
-        <div class="links">
-          <NuxtLink
-            v-for="(destination, idx) in destinations"
-            :key="idx"
-            class="giant-button"
-            :to="{ name: 'destinations-id', params: { id: destination.code } }"
-          >
-            {{ destination.name }}
-          </NuxtLink>
-        </div>
+        <h1 class="title">Liste des tickets</h1>
+        <p v-for="(ticket, idx) in tickets" :key="idx" class="giant-button">
+          {{ ticket }}
+        </p>
       </div>
     </div>
   </div>
@@ -23,14 +16,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-
 export default {
-  async asyncData({ store }) {
-    await store.dispatch('destinations/loadDestinations')
+  async asyncData({ store, params }) {
+    await store.dispatch('tickets/loadTicketsByDestination', params.id)
   },
   computed: {
     ...mapGetters({
-      destinations: 'destinations/getDreamDestinations',
+      tickets: 'tickets/getTickets',
     }),
   },
 }
